@@ -5,66 +5,242 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>قوانين  والدستور العام | Project RP</title>
     <style>
-       :root {
-    --bg-main: #030712;          /* أسود ملكي مائل كحلي */
-    --bg-card: #0b1329;          /* كحلي غامق جداً للكروت */
-    --border-card: #1c2541;      /* حدود زرقاء هادئة */
-    --accent-gold: #00b4d8;      /* أزرق نيوني مضيء للأزرار والعناوين */
-    --accent-glow: rgba(0, 180, 216, 0.25); /* توهج أزرق نيوني */
-    --text-main: #f1f5f9;        /* لون النص الأساسي أبيض ثلجي */
-    --text-muted: #48cae4;      /* لون النصوص الفرعية أزرق سماوي ناعم */
-    --shadow-lux: 0 15px 35px rgba(0, 0, 0, 0.8); 
+  @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700;900&display=swap');
+
+:root{
+--bg:#050816;
+--card:rgba(13,18,38,.70);
+--border:#23345f;
+--primary:#00d4ff;
+--secondary:#7b2cff;
+--text:#ffffff;
+--muted:#98a8d8;
+--glow:0 0 25px rgba(0,212,255,.35);
 }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            margin: 0;
-            padding: 40px 20px;
-            background-image: radial-gradient(circle at 50% -10%, rgba(197, 168, 128, 0.12) 0%, transparent 50%);
-        }
 
-        .container {
-            max-width: 950px;
-            margin: 0 auto;
-        }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
-        .header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
+body{
+font-family:'Tajawal',sans-serif;
+background:
+radial-gradient(circle at top,#12234e 0%,transparent 40%),
+linear-gradient(135deg,#02040d,#071124,#02040d);
+color:var(--text);
+padding:40px 18px;
+overflow-x:hidden;
+}
 
-        .header::before {
-            content: "👑";
-            font-size: 2.5rem;
-            color: var(--accent-gold);
-            display: block;
-            margin-bottom: 10px;
-        }
+.container{
+max-width:1350px;
+margin:auto;
+}
 
-        .header h1 {
-            font-size: 3rem;
-            font-weight: 900;
-            margin: 0;
-            color: #ffffff;
-            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.8), 0 0 30px var(--accent-glow);
-        }
+/* HERO */
 
-        .header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            margin-top: 5px;
-            font-style: italic;
-        }
+.header{
+text-align:center;
+padding:70px 40px;
+margin-bottom:45px;
+border-radius:30px;
+background:linear-gradient(145deg,
+rgba(0,212,255,.08),
+rgba(123,44,255,.08));
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(18px);
+box-shadow:
+0 0 50px rgba(0,212,255,.12),
+0 0 120px rgba(123,44,255,.08);
+position:relative;
+overflow:hidden;
+}
 
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-gold);
-            margin: 40px 0 20px 0;
-            padding-right: 15px;
-            border-right: 4px solid var(--accent-gold);
-        }
+.header:before{
+content:'';
+position:absolute;
+width:350px;
+height:350px;
+background:rgba(0,212,255,.12);
+filter:blur(120px);
+top:-120px;
+left:-80px;
+}
+
+.header h1{
+font-size:4rem;
+font-weight:900;
+letter-spacing:3px;
+background:linear-gradient(90deg,#fff,#00d4ff,#7b2cff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+margin-bottom:12px;
+}
+
+.header p{
+font-size:1.2rem;
+color:var(--muted);
+}
+
+/* TITLES */
+
+.section-title{
+font-size:1.8rem;
+margin:45px 0 25px;
+padding:18px 24px;
+border-radius:18px;
+background:rgba(0,212,255,.08);
+border:1px solid rgba(255,255,255,.05);
+box-shadow:var(--glow);
+font-weight:800;
+}
+
+/* ACCORDION */
+
+.accordion-item{
+margin-bottom:22px;
+border-radius:24px;
+overflow:hidden;
+background:var(--card);
+border:1px solid rgba(255,255,255,.06);
+backdrop-filter:blur(22px);
+transition:.35s;
+box-shadow:0 12px 40px rgba(0,0,0,.45);
+}
+
+.accordion-item:hover{
+transform:translateY(-5px);
+box-shadow:0 0 35px rgba(0,212,255,.25);
+}
+
+.accordion-toggle{
+display:none;
+}
+
+.accordion-header{
+padding:28px 30px;
+cursor:pointer;
+font-size:1.25rem;
+font-weight:800;
+display:flex;
+justify-content:space-between;
+align-items:center;
+transition:.25s;
+}
+
+.accordion-header:hover{
+color:var(--primary);
+}
+
+.accordion-header::after{
+content:"+";
+font-size:2rem;
+color:var(--primary);
+}
+
+.accordion-toggle:checked + .accordion-header::after{
+content:"—";
+}
+
+.accordion-content{
+max-height:0;
+overflow:hidden;
+transition:.45s ease;
+}
+
+.accordion-toggle:checked ~ .accordion-content{
+max-height:5000px;
+}
+
+.inner-padding{
+padding:30px;
+line-height:2;
+font-size:1.05rem;
+color:#dbe7ff;
+}
+
+/* LIST */
+
+ul{
+list-style:none;
+}
+
+li{
+margin-bottom:16px;
+padding-right:35px;
+position:relative;
+}
+
+li:before{
+content:"◆";
+position:absolute;
+right:0;
+color:var(--primary);
+}
+
+/* TABLE */
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:25px;
+overflow:hidden;
+border-radius:18px;
+}
+
+th{
+background:linear-gradient(90deg,#00d4ff,#7b2cff);
+padding:20px;
+}
+
+td{
+padding:18px;
+background:rgba(255,255,255,.04);
+}
+
+/* NOTICE */
+
+.notice{
+margin-top:50px;
+padding:35px;
+border-radius:24px;
+background:linear-gradient(135deg,
+rgba(255,70,70,.12),
+rgba(123,44,255,.12));
+border:1px solid rgba(255,255,255,.08);
+text-align:center;
+}
+
+/* FOOTER */
+
+.footer{
+margin-top:70px;
+padding:35px;
+text-align:center;
+color:var(--muted);
+border-top:1px solid rgba(255,255,255,.08);
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.header h1{
+font-size:2.2rem;
+}
+
+.accordion-header{
+font-size:1rem;
+padding:22px;
+}
+
+.section-title{
+font-size:1.2rem;
+}
+
+}
 
         /* نظام الأكورديون المضمون بدون جافا سكريبت */
         .accordion-item {
